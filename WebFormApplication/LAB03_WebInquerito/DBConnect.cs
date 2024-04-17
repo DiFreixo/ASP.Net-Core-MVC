@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SQLite;
+using System.Diagnostics;
 
 namespace LAB03_WebInquerito { 
 
@@ -30,7 +31,7 @@ namespace LAB03_WebInquerito {
             catch (SQLiteException ex)
             {
 
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
                 return false;
             }
         }
@@ -43,7 +44,7 @@ namespace LAB03_WebInquerito {
             }
             catch (SQLiteException ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
                 return false;
             }
         }
@@ -58,21 +59,18 @@ namespace LAB03_WebInquerito {
                 if(this.OpenConnection())
                 {
                     SQLiteCommand cmd = new SQLiteCommand(query, connection);
-
                     cmd.ExecuteNonQuery();
-                    this.CloseConnection();
-                }
-                else
-                {
-                    return false;
                 }
             }
             catch (SQLiteException ex) 
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
                 return false;
             }
-
+            finally
+            {
+                CloseConnection();
+            }
 
             return true;
         }
@@ -123,7 +121,7 @@ namespace LAB03_WebInquerito {
             }
             catch (SQLiteException ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
                 return false;
             }
 
@@ -154,7 +152,7 @@ namespace LAB03_WebInquerito {
             }
             catch (SQLiteException ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
                 return false;
             }
 
