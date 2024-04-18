@@ -27,7 +27,7 @@
                 <tr>
                     <td class="auto-style3">ID</td>
                     <td>
-                        <asp:DropDownList ID="ddlFormandos" runat="server" OnSelectedIndexChanged="ddlFormandos_SelectedIndexChanged">
+                        <asp:DropDownList ID="ddlFormandos" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlFormandos_SelectedIndexChanged">
                         </asp:DropDownList>
                     </td>
                 </tr>

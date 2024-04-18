@@ -13,7 +13,7 @@ namespace LAB05_WebBDMySQL
         protected void Page_Load(object sender, EventArgs e)
         {
             lblNFormandos.Text = ligacao.Count().ToString();
-            //lblMedia.Text = ligacao.Media().ToString();
+            lblMedia.Text = ligacao.Media().ToString("0.00");
             
             if(!Page.IsPostBack)
             {
@@ -38,9 +38,10 @@ namespace LAB05_WebBDMySQL
             Response.Redirect("WebFormDelete.aspx");
         }
 
-        protected void GridView1_PageIndexChanged(object sender, EventArgs e)
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-           // GridView1.PageIndex = e;
+            GridView1.PageIndex = e.NewPageIndex;
             ligacao.Bind(ref GridView1);
             GridView1.DataBind();
         }

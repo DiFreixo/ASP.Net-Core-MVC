@@ -93,7 +93,7 @@ namespace LAB05_WebBDMySQL
         {
             try
             {
-                string query = "Select id_formando, nome, genero, idade From formando order by id_formando";
+                string query = "Select id_formando, nome From formando order by id_formando";
 
                 if (this.OpenConnection())
                 {
@@ -120,8 +120,7 @@ namespace LAB05_WebBDMySQL
             }
         }
 
-        public bool DevolverFormando(string id, ref string nome, ref char genero,
-            ref int idade)
+        public bool DevolverFormando(string id, ref string nome, ref char genero, ref int idade)
         {
             try
             {
@@ -145,7 +144,7 @@ namespace LAB05_WebBDMySQL
             }
             catch (MySqlException ex)
             {
-                this.CloseConnection();
+                //this.CloseConnection();
                 Debug.WriteLine(ex.Message);
                 return false;
             }
@@ -162,7 +161,7 @@ namespace LAB05_WebBDMySQL
         {
             try
             {
-                string query = "Delete From formando where id_formando = " + id;
+                string query = "Delete From formando where id_formando = '" + id + "'";
                 if (this.OpenConnection())
                 {
                     MySqlCommand cmd = new MySqlCommand(query, connection);
@@ -233,13 +232,56 @@ namespace LAB05_WebBDMySQL
             }
         }
 
-/*
-        public double Media()
+        // média das idades dos formandos
+        public float Media()
         {
+            float media = -1;
+            try
+            {
+                if (this.OpenConnection())
+                {
+                    MySqlCommand cmd = new MySqlCommand("Select avg(idade) From formando", connection);
+                    media = float.Parse(cmd.ExecuteScalar().ToString());
+                }
 
+            }
+            catch (MySqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+            return media;
         }
-*/
 
+
+        // atualizar o registo 
+        public bool Update(string id, string nome, char genero, string idade)
+        {
+            bool flag = true;
+
+            try
+            {
+                string query = "Update formando set nome = '" + nome + "', genero = '" + genero + "', idade  = '" + idade + "' where id_formando = '" + id + "'" ;
+                if (this.OpenConnection())
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                flag = false;
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+            return flag;
+        }
 
     }
 }
