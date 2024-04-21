@@ -5,9 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <link href="CSS/StyleSheet1.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
         .auto-style1 {
             width: 27%;
+        }
+        .auto-style2 {
+            height: 31px;
         }
     </style>
 </head>
@@ -15,19 +19,28 @@
     <form id="form1" runat="server">
         <div>
             <br />
-            Gestão de Formandos
-            <br />
-            <br />
             <table class="auto-style1">
                 <tr>
+                    <td colspan="2">
+                        Gestão de Formandos</td>
+                    <td class="auto-style2">
+                        <asp:Button ID="btnLogout" runat="server" Text="Logout" Width="110px" OnClick="btnLogout_Click" CssClass="button" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <asp:Label ID="lblUser" runat="server"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
                     <td>
-                        <asp:Button ID="btnInserir" runat="server" Text="Inserir" Width="110px" OnClick="btnInserir_Click" />
+                        <asp:Button ID="btnInserir" runat="server" Text="Inserir" Width="110px" OnClick="btnInserir_Click" CssClass="button" />
                     </td>
                     <td>
-                        <asp:Button ID="btnAtualizar" runat="server" Text="Atualizar" Width="110px" OnClick="btnAtualizar_Click" />
+                        <asp:Button ID="btnAtualizar" runat="server" Text="Atualizar" Width="110px" OnClick="btnAtualizar_Click" CssClass="button" />
                     </td>
                     <td>
-                        <asp:Button ID="btnApagar" runat="server" Text="Apagar" Width="110px" OnClick="btnApagar_Click" />
+                        <asp:Button ID="btnApagar" runat="server" Text="Apagar" Width="110px" OnClick="btnApagar_Click" CssClass="button" />
                     </td>
                 </tr>
                 <tr>

@@ -283,5 +283,61 @@ namespace LAB05_WebBDMySQL
             return flag;
         }
 
+
+        public bool ValidateUser(string userName, string password)
+        {
+            MySqlCommand cmd;
+            string lookupPassword = null;
+
+            // verificar userName
+            // userName não pode ser null e deve ter entre 1 a 15 caracteres
+            if ((userName == null) || (userName.Length == 0) || (userName.Length > 15))
+            {
+                Trace.WriteLine("[ValidateUser] Input validation of userName failed");
+                return false;
+            }
+
+            // verificar password
+            // password não pode ser null e deve ter entre 1 a 25 caracteres
+            if ((password == null) || (password.Length == 0) || (password.Length > 25))
+            {
+                Trace.WriteLine("[ValidateUser] Input validation of password failed");
+                return false;
+            }
+
+            try
+            {
+                if (this.OpenConnection())
+                {
+                    // criar o MySqlCommand para selecionar a password pwd da tabela users para o userName fornecido
+                    cmd = new MySqlCommand("Select pwd from users where uName = @userName", connection);
+                    cmd.Parameters.Add("@userName", MySqlDbType.VarChar, 25);
+                    cmd.Parameters["@userName"].Value = userName;
+
+                    // executar o comando e procurar a password pwd
+                    lookupPassword = cmd.ExecuteScalar().ToString();
+
+
+                    // limpar o comando e fechar a conexão
+                    cmd.Dispose();
+                    this.CloseConnection();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Trace.WriteLine("[ValidateUser] Exception " + ex.Message);
+            }
+
+            // se não encontrar a password, return false
+            if(lookupPassword == null)
+            {
+                return false;
+            }
+
+            // comparar a lookupPassword com a password, utilizando comparação case-sensitive 
+            return (string.Compare(lookupPassword, password, false) == 0);
+
+        }
+
     }
 }

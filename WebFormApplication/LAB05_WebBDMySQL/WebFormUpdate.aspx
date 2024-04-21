@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <link href="CSS/StyleSheet1.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
         .auto-style1 {
             margin-left: 40px;
@@ -38,7 +39,7 @@
             <td>
                 <asp:TextBox ID="txtID" runat="server" Width="146px"></asp:TextBox>
                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                 <asp:Button ID="btnProcurar" runat="server" Text="Procurar" Width="110px" OnClick="btnProcurar_Click" />
+                 <asp:Button ID="btnProcurar" runat="server" Text="Procurar" Width="110px" OnClick="btnProcurar_Click" CssClass="button"/>
             </td>
         </tr>
         <tr>
@@ -69,10 +70,10 @@
         </tr>
          <tr>
              <td class="auto-style3">
-                 <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" Width="110px" OnClick="btnCancelar_Click" />
+                 <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" Width="110px" OnClick="btnCancelar_Click" CssClass="button" />
              </td>
              <td>
-                 <asp:Button ID="btnAtualizar" runat="server" Text="Atualizar" Width="110px" OnClick="btnAtualizar_Click" />
+                 <asp:Button ID="btnAtualizar" runat="server" Text="Atualizar" Width="110px" OnClick="btnAtualizar_Click" CssClass="button" />
              </td>
          </tr>
          <tr>

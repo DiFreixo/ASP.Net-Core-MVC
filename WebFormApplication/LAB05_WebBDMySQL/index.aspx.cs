@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Security;
 
 namespace LAB05_WebBDMySQL
 {
@@ -20,6 +21,8 @@ namespace LAB05_WebBDMySQL
                 lblMensagem.Text = Request.QueryString["r"];
                 ligacao.Bind(ref GridView1);
                 GridView1.DataBind();
+                // para indicar o utilizador
+                lblUser.Text = Session["userName"].ToString();
             }
         }
 
@@ -44,6 +47,13 @@ namespace LAB05_WebBDMySQL
             GridView1.PageIndex = e.NewPageIndex;
             ligacao.Bind(ref GridView1);
             GridView1.DataBind();
+        }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            FormsAuthentication.SignOut();
+            FormsAuthentication.RedirectToLoginPage();
         }
     }
 }
