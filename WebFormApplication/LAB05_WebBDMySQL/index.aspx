@@ -22,7 +22,8 @@
             <table class="auto-style1">
                 <tr>
                     <td colspan="2">
-                        Gestão de Formandos</td>
+                        <h1>Gestão de Formandos</h1>
+                    </td>
                     <td class="auto-style2">
                         <asp:Button ID="btnLogout" runat="server" Text="Logout" Width="110px" OnClick="btnLogout_Click" CssClass="button" />
                     </td>
@@ -30,6 +31,8 @@
                 <tr>
                     <td colspan="3">
                         <asp:Label ID="lblUser" runat="server"></asp:Label>
+                        <br />
+                        <br />
                     </td>
                 </tr>
                 <tr>

@@ -21,7 +21,7 @@
 <body>
     <form id="form1" runat="server">
         <div class="auto-style1">
-            <br />Apagar Formando
+            <br /><h1>Apagar Formando</h1>
             <br />
             <br />
             <table class="auto-style2">

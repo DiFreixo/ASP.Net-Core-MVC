@@ -339,5 +339,97 @@ namespace LAB05_WebBDMySQL
 
         }
 
+
+        public bool ValidateUserStatus(string userName, ref int nFalhas)
+        {
+            bool flag = false;
+            
+            try
+            {
+                string query = "select falhas from utilizador where nome_utilizador = '" + userName + "' and estado = 'I';";
+
+                if (this.OpenConnection())
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    if (cmd.ExecuteScalar() != null)
+                    {
+                        nFalhas = int.Parse(cmd.ExecuteScalar().ToString());
+                        flag = true;
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+
+            return flag;
+        }
+
+
+        public bool ValidateUsers2(string username, string password, ref string id_user)
+        {
+            bool flag = false;
+
+            try
+            {
+                string query = "select id_utilizador from utilizador where binary nome_utilizador = '" + username + "' " +
+                    "and palavra_passe = " + "sha2('" + password + "', 512) and estado = 'A';";
+                if (OpenConnection())
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    if (cmd.ExecuteScalar() != null)
+                    {
+                        id_user = cmd.ExecuteScalar().ToString();
+                        flag = true;
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+                CloseConnection();
+                if (flag)
+                {
+                    PUserSuccessLogin(username, "S");
+                }
+                else
+                {
+                    PUserSuccessLogin(username, "U");
+                }
+            }
+
+            return flag;
+        }
+
+        private void PUserSuccessLogin(string username, string result)
+        {
+            try
+            {
+                string query = "call pUSuccesLogin('" + username + "', '" + result + "')";
+                if (OpenConnection())
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+
     }
 }

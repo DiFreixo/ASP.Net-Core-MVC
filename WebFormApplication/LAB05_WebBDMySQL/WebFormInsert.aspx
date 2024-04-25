@@ -19,7 +19,7 @@
     <form id="form1" runat="server">
         <div class="auto-style1">
             <br />
-            Registar Formando
+            <h1>Registar Formando</h1>
             <br />
             <br />
             <table style="width: 100%;">

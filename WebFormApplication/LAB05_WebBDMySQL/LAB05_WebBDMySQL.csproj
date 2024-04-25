@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CSS\StyleSheet1.css" />
+    <Content Include="database\Database gestaoformandos2.sql" />
     <Content Include="index.aspx" />
     <Content Include="Logon.aspx" />
     <Content Include="password\pwd.png" />

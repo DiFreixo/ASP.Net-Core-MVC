@@ -23,7 +23,7 @@
     <form id="form1" runat="server">
         <div class="auto-style1">
     <br />
-    Atualizar Formando
+    <h1>Atualizar Formando</h1>
     <br />
     <br />
     <table style="width: 100%;">
@@ -39,8 +39,7 @@
             <td>
                 <asp:TextBox ID="txtID" runat="server" Width="146px"></asp:TextBox>
                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                 <asp:Button ID="btnProcurar" runat="server" Text="Procurar" Width="110px" OnClick="btnProcurar_Click" CssClass="button"/>
-            </td>
+                 </td>
         </tr>
         <tr>
             <td class="auto-style3">Nome</td>

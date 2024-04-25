@@ -42,6 +42,7 @@ namespace LAB05_WebBDMySQL
                 txtID.Text = id;
                 txtNome.Text = nome_aux;
                 ddlIdade.SelectedValue = idade.ToString();
+                lblMensagem.Text = "";
 
                 
                 if (genero == 'F')
@@ -59,7 +60,7 @@ namespace LAB05_WebBDMySQL
             {
                 txtID.Text = "";
                 txtNome.Text = "";                
-                ddlIdade.SelectedValue = "";
+                ddlIdade.SelectedIndex = 17;
                 rbMasculino.Checked = false;
                 rbFeminino.Checked = false;
             }
@@ -118,11 +119,6 @@ namespace LAB05_WebBDMySQL
             }
 
             return true;
-        }
-
-        protected void btnProcurar_Click(object sender, EventArgs e)
-        {
-
         }
 
 

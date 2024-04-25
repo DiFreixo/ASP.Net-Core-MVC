@@ -11,6 +11,7 @@ namespace LAB05_WebBDMySQL
     public partial class Logon : System.Web.UI.Page
     {
         DBConnect ligacao = new DBConnect();
+        string idUser = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack)
@@ -19,11 +20,28 @@ namespace LAB05_WebBDMySQL
                 if (ViewState["Password"] != null)
                     txtPassword.Attributes["value"] = ViewState["Password"].ToString();
             }
+
+            /*
+            if (IsPostBack)
+            {
+                if (!(String.IsNullOrEmpty(txtPassword.Text.Trim())))
+                    txtPassword.Attributes["value"] = txtPassword.Text;
+            }
+            */
         }
        
         protected void btnLogon_Click(object sender, EventArgs e)
         {
-            if(ligacao.ValidateUser(txtEmail.Text, txtPassword.Text))
+            int nFalhas = 0;
+
+            if(ligacao.ValidateUserStatus(txtEmail.Text, ref nFalhas))
+            {
+                string message = "Utilizador bloqueado! Nº Tentativas de autenticação: " + nFalhas + "\\nContacte o Administrador do Sistema.";
+                string script = "alert('" + message + "');";
+                ClientScript.RegisterStartupScript(this.GetType(), "alertMessage", script, true);
+            }
+
+            if(ligacao.ValidateUsers2(txtEmail.Text, txtPassword.Text, ref idUser))
             {
                 Session["userName"] = txtEmail.Text;
                 FormsAuthentication.RedirectFromLoginPage(txtEmail.Text, false);
@@ -32,6 +50,8 @@ namespace LAB05_WebBDMySQL
             else
             {
                 lblMensagem.Text = "Nome ou Palavra Passe incorreto!";
+                txtEmail.Text = "";
+                txtPassword.Text = "";
             }
         }
 
